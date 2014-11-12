@@ -1,0 +1,34 @@
+#!/usr/bin/env node
+
+var fs = require('fs');
+var https = require('https');
+var path = require('path');
+var yaml = require('js-yaml');
+
+var GITHUB_LANGUAGES_URL = 'https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml';
+var GITHUB_LANGUAGES_JSON = path.resolve(__dirname, '..', 'github_colors.json');
+
+https.get(GITHUB_LANGUAGES_URL, function(res) {
+  var data = '';
+
+  res.on('data', function(d) {
+    data += d;
+  });
+
+  res.on('end', function() {
+    var languageInfo = yaml.safeLoad(data);
+    var languages = Object.keys(languageInfo);
+    var colors = {};
+
+    for (var i = 0, l = languages.length; i < l; i++) {
+      var language = languages[i];
+      var color = languageInfo[language].color;
+
+      if (color) {
+        colors[language.toLowerCase()] = color;
+      }
+    }
+
+    fs.writeFileSync(GITHUB_LANGUAGES_JSON, JSON.stringify(colors, null, 2));
+  });
+});

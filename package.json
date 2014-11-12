@@ -1,0 +1,29 @@
+{
+  "name": "github-colors",
+  "version": "0.1.0",
+  "description": "Grab GitHub's programming language colors and serialize them as JSON",
+  "main": "index.js",
+  "bin": {
+    "colors": "./bin/colors"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Pletcher/github-colors.git"
+  },
+  "keywords": [
+    "github",
+    "colors"
+  ],
+  "author": "pletcher",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pletcher/github-colors/issues"
+  },
+  "homepage": "https://github.com/Pletcher/github-colors",
+  "dependencies": {
+    "js-yaml": "^3.2.3"
+  }
+}
